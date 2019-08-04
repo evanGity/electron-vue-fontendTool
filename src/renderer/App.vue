@@ -19,7 +19,7 @@
       </el-header>
       <el-aside class="wrapper-aside">
         <el-menu :default-active="activeIndex" class="el-menu-vertical-demo" :collapse="isCollapse">
-          <el-menu-item :index="index" v-for="(item, index) in routes" :key="index" @click='goClk(item.path)'>
+          <el-menu-item :class="{'is-active': currentRouter === item.path}" :index="index" v-for="(item, index) in routes" :key="index" @click='goClk(item.path)'>
             <i :class="item.meta.icon" v-if="item.meta && item.meta.icon"></i>
             <span slot="title">{{item.meta.title}}</span>
           </el-menu-item>
@@ -42,6 +42,11 @@
         show: true,
         isCollapse: false,
         routes
+      }
+    },
+    computed: {
+      currentRouter () {
+        return this.$route.path
       }
     },
     methods: {
